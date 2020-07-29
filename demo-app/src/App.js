@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -40,15 +40,9 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px'
-    };
-
     let persons = null;
-
+    let btnClass = [classes.Button];
+    
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -66,21 +60,32 @@ class App extends Component {
             )
           })}
         </div>
-
       );
+
+      btnClass.push(classes.Red);
+
+     }
+
+    let assignedClasses = [];
+    if (this.state.persons.length <= 2) {
+      assignedClasses.push(classes.red);
+    }
+    if (this.state.persons.length <= 1) {
+      assignedClasses.push(classes.bold);
     }
 
     return (
-      <div className="App">
-        <h1>Hi</h1>
-        <button
-          onClick={this.togglePersonHandler}
-          className="button"
-          style={style}
-        >{this.state.showPersons ? 'Hide names' : 'Show names'}
-        </button>
-        {persons}
-      </div>
+        <div className={classes.App}>
+          <h1>Hi</h1>
+          <p className={assignedClasses.join(' ')}>This works mofo!</p>
+          <button
+            className={btnClass.join(' ')}
+            alt={this.state.showPersons}
+            onClick={this.togglePersonHandler}
+          >{this.state.showPersons ? 'Hide names' : 'Show names'}
+          </button>
+          {persons}
+        </div>
     );
   }
 }
