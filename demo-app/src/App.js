@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -42,21 +43,22 @@ class App extends Component {
   render() {
     let persons = null;
     let btnClass = [classes.Button];
-    
+
     if (this.state.showPersons) {
       persons = (
         <div>
           {this.state.persons.map((person, i) => {
             return (
-              <Person
-                key={person.id}
-                name={person.name}
-                age={person.age}
-                changed={(event) => this.nameChangedHandler(event, person.id)}
-                click={() => this.deletePersonHandler(i)}
-              >
-                My hobbies: {person.hobbies}
-              </Person>
+              <ErrorBoundary key={person.id}>
+                <Person
+                  name={person.name}
+                  age={person.age}
+                  changed={(event) => this.nameChangedHandler(event, person.id)}
+                  click={() => this.deletePersonHandler(i)}
+                >
+                  My hobbies: {person.hobbies}
+                </Person>
+              </ErrorBoundary>
             )
           })}
         </div>
@@ -64,7 +66,7 @@ class App extends Component {
 
       btnClass.push(classes.Red);
 
-     }
+    }
 
     let assignedClasses = [];
     if (this.state.persons.length <= 2) {
@@ -75,17 +77,17 @@ class App extends Component {
     }
 
     return (
-        <div className={classes.App}>
-          <h1>Hi</h1>
-          <p className={assignedClasses.join(' ')}>This works mofo!</p>
-          <button
-            className={btnClass.join(' ')}
-            alt={this.state.showPersons}
-            onClick={this.togglePersonHandler}
-          >{this.state.showPersons ? 'Hide names' : 'Show names'}
-          </button>
-          {persons}
-        </div>
+      <div className={classes.App}>
+        <h1>Hi</h1>
+        <p className={assignedClasses.join(' ')}>This works mofo!</p>
+        <button
+          className={btnClass.join(' ')}
+          alt={this.state.showPersons}
+          onClick={this.togglePersonHandler}
+        >{this.state.showPersons ? 'Hide names' : 'Show names'}
+        </button>
+        {persons}
+      </div>
     );
   }
 }
