@@ -3,6 +3,13 @@ Testing ground for projects using React
 
 ## Example projects
 
+### Developer Jay Profile 
+**DEMO**: http://developerjay.uk    
+**REPO**: https://github.com/jasonj85/developerjay  
+**TECH**: MERN stack  
+**INFO**: 
+* Site to display developer profiles
+
 ### Breaking Bad API
 **DEMO**: https://breaking-bad-api-nu.vercel.app  
 **REPO**: https://github.com/jasonj85/playground-react/tree/master/breaking-bad-api  
