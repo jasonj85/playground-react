@@ -3,6 +3,14 @@ Testing ground for projects using React
 
 ## Example projects
 
+### Movie App using React Hooks
+**DEMO**: https://react-hooks-movie-app.vercel.app         
+**REPO**: https://github.com/jasonj85/playground-react/tree/master/react-hooks-movie-app  
+**TECH**: React  
+**INFO**: 
+* Demo react site that uses react hooks 
+* Uses TMDB API to search and retrieve latest popular movies
+
 ### Developer Jay Profile 
 **DEMO**: http://developerjay.uk    
 **REPO**: https://github.com/jasonj85/developerjay  
