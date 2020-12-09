@@ -8,7 +8,12 @@ const getApplications = () => {
   return axios.get('applications')
 };
 
+const getUserApplications = (email) => {
+  return axios.post("applicant", {email})
+};
+
 export default {
   postApplication,
   getApplications,
+  getUserApplications
 };

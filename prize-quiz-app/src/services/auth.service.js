@@ -31,14 +31,10 @@ const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("user"));
 };
 
-const getCurrentUserApplications = (email) => {
-    return axios.post("applicant", {email})
-  };
 
 export default {
     register,
     login,
     getCurrentUser,
-    getCurrentUserApplications,
     logout
 };
