@@ -6,6 +6,10 @@ import FullPost from './FullPost/FullPost';
 import './Blog.css';
 
 class Blog extends Component {
+    state = {
+        auth: false
+    }
+
     render() {
         return (
             <div className="Blog">
@@ -22,10 +26,11 @@ class Blog extends Component {
                     </nav>
                 </header>
                 <Switch>
+                    {this.state.auth ? <Route path="/new-post" exact component={NewPost} /> : null}
                     <Route path="/" exact component={Posts} />
                     <Route path="/posts" exact component={Posts} />
                     <Route path="/posts/:id" exact component={FullPost} />
-                    <Route path="/new-post" exact component={NewPost} />
+                    <Route render={() => <h3>404 not found.</h3>} />
                 </Switch>
 
             </div>
