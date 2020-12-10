@@ -3,24 +3,12 @@ import React, { useState, useRef } from "react";
 import AuthService from "../../../services/auth.service";
 
 const Login = (props) => {
-    const form = useRef();
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [notification, setNotification] = useState("");
 
-    const onChangeUsername = (e) => {
-        const username = e.target.value;
-        setUsername(username);
-    };
-
-    const onChangePassword = (e) => {
-        const password = e.target.value;
-        setPassword(password);
-    };
-
-    const handleLogin = (e) => {
+    const handleLogin = e => {
         e.preventDefault();
 
         setNotification("");
@@ -48,7 +36,7 @@ const Login = (props) => {
     return (
         <div className="col-md-12">
             <div className="card card-container">
-                <form onSubmit={handleLogin} ref={form}>
+                <form onSubmit={handleLogin}>
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input
@@ -56,7 +44,7 @@ const Login = (props) => {
                             className="form-control"
                             name="username"
                             value={username}
-                            onChange={onChangeUsername}
+                            onChange={e => setUsername(e.target.value)}
                         />
                     </div>
 
@@ -67,7 +55,7 @@ const Login = (props) => {
                             className="form-control"
                             name="password"
                             value={password}
-                            onChange={onChangePassword}
+                            onChange={e => setPassword(e.target.value)}
                         />
                     </div>
 

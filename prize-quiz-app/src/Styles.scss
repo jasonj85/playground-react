@@ -1,24 +1,25 @@
-h1 {
-  display: table;
-  margin: 40px auto;
-  color: #fff;
-  font: 30px Helvetica;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  letter-spacing: 10px;
-}
-
 body {
   background-color: whitesmoke;
 }
 
+.app {
+  margin: 0 auto;
+}
+
 .entry-form {
-  width: 80;
   text-align: center;
 } 
 
-.logo {
+.container {
   width: 600px;
+}
+
+.entry-form p {
+  text-align: left;
+} 
+
+.logo {
+  width: 100%;
   border: 5px solid black;
 }
 
@@ -67,7 +68,7 @@ form {
     background: #9D1B3D;
     color: #fff;
     padding: 20px;
-    width: 100%;
+    width: auto;
     text-transform: uppercase;
     letter-spacing: 5px;
 
