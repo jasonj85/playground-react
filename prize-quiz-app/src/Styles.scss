@@ -23,6 +23,26 @@ body {
   border: 5px solid black;
 }
 
+button {
+  transition: all 0.2s ease-in-out;
+  font: 18px Helvetica, Arial, sans-serif;
+  border: none;
+  background: #9D1B3D;
+  color: #fff;
+  padding: 20px;
+  width: auto;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin: 5px 0;
+  border-radius: 10px;
+
+
+  &:hover {
+    background: #78152f;
+    cursor: pointer;
+  }
+}
+
 form {
   display: table;
   margin: 40px auto;
@@ -59,22 +79,5 @@ form {
 
   textarea {
     height: 200px;
-  }
-
-  button {
-    transition: all 0.2s ease-in-out;
-    font: 18px Helvetica, Arial, sans-serif;
-    border: none;
-    background: #9D1B3D;
-    color: #fff;
-    padding: 20px;
-    width: auto;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-
-    &:hover {
-      background: #9D1B3D;
-      cursor: pointer;
-    }
   }
 }

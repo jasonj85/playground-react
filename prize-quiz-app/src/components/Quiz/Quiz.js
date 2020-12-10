@@ -18,8 +18,7 @@ const Quiz = () => {
     const [score, setScore] = useState();
 
     const getNewQuestions = () => {
-        // const newQuestions = QuizService.getQuestions();
-        axios.get('https://opentdb.com/api.php?amount=5')
+        QuizService.getQuestions()
             .then(response => {
                 setQuestions(response.data.results);
                 console.log(response);
@@ -40,19 +39,24 @@ const Quiz = () => {
     return (
         <>
             <div className="entry-form">
+                <h5>Enter our quiz below for the chance to enter a PS5 prize draw!</h5>
+
                 <img src={logo} className="logo" alt="logo" />
                 {successful ? (
-                    <div class="alert alert-success">
+                    <div class="alert alert-warning mb-2 text-center">
                         <p>Thank you your details have been registered and you will be contacted if you win!</p>
                     </div>) :
                     (
                         <>
                             <div className="form-group">
-                                <button className="btn btn-dark btn-block" onClick={getNewQuestions}>{questions ? "Restart" : "Start" } Quiz</button>
+                                <button style={{ backgroundColor: questions ? "#EDBC07" : "#157831" }} onClick={getNewQuestions}>{questions ? "Restart" : "Start"} Quiz</button>
                             </div>
                             <QuizForm questions={questions} updateScore={updateScore} score={score} />
-                            {score ? <Result score={score} passed={passed} /> : <div style={{height: "100px"}}></div>}
-                            {passed ? <UserInfo setSuccessful={setSuccessful} setNotification={setNotification}  /> : null}
+                            <div className="jumbotron">
+
+                                {score ? <Result score={score} passed={passed} /> : <div style={{ height: "100px" }}></div>}
+                                {passed ? <UserInfo setSuccessful={setSuccessful} setNotification={setNotification} /> : null}
+                            </div>
                         </>
                     )}
             </div>

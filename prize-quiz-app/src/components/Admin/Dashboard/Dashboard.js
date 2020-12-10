@@ -1,56 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from '../../../axios';
 
-const Dashboard = () => {
+import DataTable from './DataTable';
+
+const Dashboard = (props) => {
     const [state, setState] = useState({ applications: [] });
     const [error, setError] = useState(false);
 
-    const getApplications = () => {
+    useEffect(() => {
         axios
-            .get('applications')
-            .then(res => {
-                setState({applications: res.data.rows});
-                console.log(res);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }
-
-    try {
-        getApplications();
-    } catch (error) {
-        setError(true);
-        console.log(error);
-    }
+        .get('applications')
+        .then(res => {
+            setState({applications: res.data.rows});
+            console.log(res);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+      }, []);
 
     return (
-        <React.Fragment>
-            <button onClick={getApplications}>Refresh applications</button>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Answer</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {state.applications.map(app => {
-                        console.log(app);
-                        return (
-                            <tr key={app.id}>
-                                <td>{app.name}</td>
-                                <td>{app.email}</td>
-                                <td>{app.answer}</td>
-                            </tr>
-                        );
-                    })
-                    }
-                </tbody>
-            </table>
-        </React.Fragment>
+        <>
+            <h4>View all prize quiz entries:</h4>
+            <p>There are {state.applications.length} applications</p>
+            <DataTable rows={state.applications} />
+        </>
     )
 }
 

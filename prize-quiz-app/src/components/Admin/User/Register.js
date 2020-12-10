@@ -38,6 +38,9 @@ const Register = (props) => {
 
     return (
         <div className="col-md-12">
+            <div class="alert alert-warning mb-2 text-center">
+                <p>If you want to check the status of your previous entries please register with your email address</p>
+            </div>
             <div className="card card-container">
                 <form onSubmit={handleRegister}>
                     <div>
@@ -78,7 +81,7 @@ const Register = (props) => {
                             <button className="btn btn-dark btn-block">Register</button>
                         </div>
                     </div>
-                    
+
 
                     {notification && (
                         <div className="form-group">

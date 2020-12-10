@@ -17,6 +17,7 @@ const QuizForm = (props) => {
 
         let score = 0;
         // compare user answers to correct answers and calculate score
+        // will refactor to dynamic check
         console.log(props.questions) 
         if (formData.q1 === props.questions[0].correct_answer) score +=20;
         if (formData.q2 === props.questions[1].correct_answer) score +=20;
@@ -35,7 +36,7 @@ const QuizForm = (props) => {
                     {props.questions.map((question, index) => {
                         return (
                             <div>
-                                <p>Question #{index + 1} {(question.question)}</p>
+                                <p><strong>Question {index + 1} - {(question.question)}</strong></p>
 
                                 <div class="form-group">
                                     <select className="form-control" name={"q" + (index + 1).toString()} 

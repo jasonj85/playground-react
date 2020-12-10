@@ -35,6 +35,9 @@ const Login = (props) => {
 
     return (
         <div className="col-md-12">
+            <div class="alert alert-warning mb-2 text-center">
+                <p>Please login with your details</p>
+            </div>
             <div className="card card-container">
                 <form onSubmit={handleLogin}>
                     <div className="form-group">
