@@ -3,7 +3,7 @@ var cors = require('cors');
 var http = require('http');
 var bodyParser = require('body-parser')
 
-// verbose for long stack traces
+// use sql lite for a temporary demo testing
 var sqlite3 = require('sqlite3');
 const db = new sqlite3.Database('./database/sqlite.db');
 
@@ -56,7 +56,7 @@ db.run(`CREATE TABLE IF NOT EXISTS users(
         console.log("Could not initialise db users table");
     }
 
-    // let insertUser = 'INSERT INTO users (username, email, password) VALUES (?,?)';
+    // let insertUser = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
     // db.run(insertUser, ["jason", "jason@email.com", "password123"]);
 });
 

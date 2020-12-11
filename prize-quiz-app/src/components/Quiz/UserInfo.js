@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from '../../axios';
 import AppService from '../../services/application.service';
 
 import '../../Styles.scss';

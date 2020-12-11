@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from '../../axios';
 
 import QuizForm from './QuizForm';
 import Result from './Result';
@@ -15,6 +14,7 @@ const Quiz = () => {
     const [notification, setNotification] = useState("");
     const [questions, setQuestions] = useState();
     const [passed, setPassed] = useState(false);
+    const [failed, setFailed] = useState(false);
     const [score, setScore] = useState();
 
     const getNewQuestions = () => {
@@ -26,12 +26,14 @@ const Quiz = () => {
 
         setScore();
         setPassed(false);
+        setFailed(false);
     };
 
     const updateScore = result => {
         setScore(result);
 
-        if (result >= 80) setPassed(true);
+        if (result >= 80) setPassed(true) 
+        else (setFailed(true))
 
         console.log(result);
     };
@@ -45,16 +47,17 @@ const Quiz = () => {
                 {successful ? (
                     <div class="alert alert-warning mb-2 text-center">
                         <p>Thank you your details have been registered and you will be contacted if you win!</p>
+                        <p>If you want to check the status of your application register with your email address.</p>
                     </div>) :
                     (
                         <>
                             <div className="form-group">
                                 <button style={{ backgroundColor: questions ? "#EDBC07" : "#157831" }} onClick={getNewQuestions}>{questions ? "Restart" : "Start"} Quiz</button>
                             </div>
-                            <QuizForm questions={questions} updateScore={updateScore} score={score} />
+                            <QuizForm questions={questions} updateScore={updateScore} score={score} failed={failed} />
                             <div className="jumbotron">
 
-                                {score ? <Result score={score} passed={passed} /> : <div style={{ height: "100px" }}></div>}
+                                {passed || failed ? <Result score={score} passed={passed} /> : <div style={{ height: "100px" }}></div>}
                                 {passed ? <UserInfo setSuccessful={setSuccessful} setNotification={setNotification} /> : null}
                             </div>
                         </>

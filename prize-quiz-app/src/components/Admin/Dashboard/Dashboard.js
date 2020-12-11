@@ -15,6 +15,7 @@ const Dashboard = (props) => {
             console.log(res);
         })
         .catch(error => {
+            setError(true);
             console.log(error);
         })
       }, []);

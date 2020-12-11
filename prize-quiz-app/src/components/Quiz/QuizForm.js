@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from '../../axios';
 import '../../Styles.scss';
 
 const QuizForm = (props) => {
@@ -26,10 +25,9 @@ const QuizForm = (props) => {
         if (formData.q5 === props.questions[4].correct_answer) score +=20;
 
         props.updateScore(score);
-           
     }
     return (
-        props.questions ?
+        props.questions && !props.failed ?
             (
                 <form onSubmit={handleCheckAnswers}>
 
@@ -38,7 +36,7 @@ const QuizForm = (props) => {
                             <div>
                                 <p><strong>Question {index + 1} - {(question.question)}</strong></p>
 
-                                <div class="form-group">
+                                <div className="form-group">
                                     <select className="form-control" name={"q" + (index + 1).toString()} 
                                     onChange={updateInput}>
                                         <option>Select answer here</option>
