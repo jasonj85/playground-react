@@ -1,19 +1,13 @@
 import axios from "../axios";
 
-const postApplication = (formData) => {
+export const PostApplication = (formData) => {
   return axios.post('applications', formData)
 };
 
-const getApplications = () => {
+export const GetApplications = () => {
   return axios.get('applications')
 };
 
-const getUserApplications = (email) => {
+export const GetUserApplications = (email) => {
   return axios.post("applicant", {email})
-};
-
-export default {
-  postApplication,
-  getApplications,
-  getUserApplications
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AppService from '../../services/application.service';
+import {PostApplication} from '../../services/application.service';
 
 import '../../Styles.scss';
 
@@ -15,7 +15,7 @@ const EntryForm = (props) => {
     const handleApplication = e => {
         e.preventDefault();
 
-        AppService.postApplication(formData).then(
+        PostApplication(formData).then(
             (response) => {
                 props.setNotification(response.data.message);
                 props.setSuccessful(true);

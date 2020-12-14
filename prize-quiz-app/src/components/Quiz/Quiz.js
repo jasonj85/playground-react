@@ -43,6 +43,12 @@ const Quiz = () => {
             <div className="entry-form">
                 <h5>Enter our quiz below for the chance to enter a PS5 prize draw!</h5>
 
+                { notification && (
+                <div class="alert alert-warning mb-2 text-center">
+                    <p>{notification}</p>
+                </div>
+                )}
+
                 <img src={logo} className="logo" alt="logo" />
                 {successful ? (
                     <div class="alert alert-warning mb-2 text-center">

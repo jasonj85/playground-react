@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import AuthService from "../../../services/auth.service";
-import ApplicationService from "../../../services/application.service";
+import { GetCurrentUser } from "../../../services/auth.service";
+import { GetUserApplications } from "../../../services/application.service";
 
 const Profile = () => {
     const [currentUser, setCurrentUser] = useState(undefined);
@@ -8,11 +8,11 @@ const Profile = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const user = AuthService.getCurrentUser();
+        const user = GetCurrentUser();
 
         if (user) {
             setCurrentUser(user);
-            ApplicationService.getUserApplications(user.email)
+            GetUserApplications(user.email)
                 .then(apps => {
                     setUserApplications(apps);
                     console.log(user);
@@ -43,7 +43,7 @@ const Profile = () => {
                             {userApplications.data.map(app => {
                                 return (<li key={app.id}>{app.answer}</li>)
                             }
-                                
+
                             )}
                         </ul>
 

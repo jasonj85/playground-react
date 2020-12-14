@@ -8,7 +8,7 @@ import Register from './components/Admin/User/Register';
 import Quiz from './components/Quiz/Quiz';
 import Navigation from './components/Navigation/Navigation';
 
-import AuthService from './services/auth.service';
+import {GetCurrentUser} from './services/auth.service';
 
 import './Styles.scss';
 
@@ -17,7 +17,7 @@ const App = (props) => {
 
   // check if user is logged in
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
+    const user = GetCurrentUser();
 
     if (user) {
       setCurrentUser(user);

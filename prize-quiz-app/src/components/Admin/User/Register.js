@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
-import AuthService from "../../../services/auth.service";
+import { RegisterUser } from "../../../services/auth.service";
 
 const Register = (props) => {
     const [username, setUsername] = useState("");
@@ -15,7 +15,7 @@ const Register = (props) => {
         setNotification("");
         setSuccessful(false);
 
-        AuthService.register(username, email, password).then(
+        RegisterUser(username, email, password).then(
             (response) => {
                 setNotification(response.data.message);
                 setSuccessful(true);

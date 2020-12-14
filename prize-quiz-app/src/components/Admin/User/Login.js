@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import AuthService from "../../../services/auth.service";
+import {LoginUser} from "../../../services/auth.service";
 
 const Login = (props) => {
     const [username, setUsername] = useState("");
@@ -14,7 +14,7 @@ const Login = (props) => {
         setNotification("");
         setLoading(true);
 
-        AuthService.login(username, password).then(
+        LoginUser(username, password).then(
             () => {
                 props.history.push("/profile");
                 window.location.reload();

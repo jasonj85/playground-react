@@ -1,6 +1,6 @@
 import axios from "../axios";
 
-const register = (username, email, password) => {
+export const RegisterUser = (username, email, password) => {
     return axios.post("register", {
         username,
         email,
@@ -8,7 +8,7 @@ const register = (username, email, password) => {
     });
 };
 
-const login = (username, password) => {
+export const LoginUser = (username, password) => {
     return axios
         .post("login", {
             username,
@@ -23,17 +23,10 @@ const login = (username, password) => {
         });
 };
 
-const logout = () => {
+export const LogoutUser = () => {
     localStorage.removeItem("user");
 };
 
-const getCurrentUser = () => {
+export const GetCurrentUser = () => {
     return JSON.parse(localStorage.getItem("user"));
-};
-
-export default {
-    register,
-    login,
-    getCurrentUser,
-    logout
 };
