@@ -48,17 +48,18 @@ const QuizForm = (props) => {
                     {questions.map((question, index) => {
                         return (
                             <div>
-                                <p><strong>Question {index + 1} - {(question.question)}</strong></p>
-
+                                <p><strong>Question {index + 1} - <span dangerouslySetInnerHTML={{__html: question.question}}></span></strong></p>
+                                
                                 <div className="form-group">
                                     <select className="form-control" name={"q" + (index + 1).toString()}
                                         onChange={updateInput}>
                                         <option>Select answer here</option>
                                         {question.answers.map((a, i) => {
-                                            return (<option value={a} key={i}>{a}</option>)
+                                            return (<option value={a} key={i} dangerouslySetInnerHTML={{__html: a}}></option>)
                                         })}
                                     </select>
                                 </div>
+                                <hr />
                             </div>
                         )
                     })}

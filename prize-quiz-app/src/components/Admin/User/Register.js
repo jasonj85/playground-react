@@ -1,21 +1,20 @@
 import React, { useState } from "react";
+import { useForm } from 'react-hook-form';
 
 import { RegisterUser } from "../../../services/auth.service";
 
 const Register = (props) => {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [successful, setSuccessful] = useState(false);
     const [notification, setNotification] = useState("");
+    const { register, handleSubmit, errors } = useForm();
 
-    const handleRegister = e => {
-        e.preventDefault();
+    console.log(errors);
 
+    const onSubmit = data => {
         setNotification("");
         setSuccessful(false);
 
-        RegisterUser(username, email, password).then(
+        RegisterUser(data.username, data.email, data.password).then(
             (response) => {
                 setNotification(response.data.message);
                 setSuccessful(true);
@@ -42,7 +41,7 @@ const Register = (props) => {
                 <p>If you want to check the status of your previous entries please register with your email address</p>
             </div>
             <div className="card card-container">
-                <form onSubmit={handleRegister}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div>
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
@@ -50,9 +49,11 @@ const Register = (props) => {
                                 type="text"
                                 className="form-control"
                                 name="username"
-                                value={username}
-                                onChange={e => setUsername(e.target.value)}
+                                ref={register({
+                                    required: 'Please enter your username.'
+                                })}
                             />
+                            <div class="invalid-feedback">{errors.username && errors.username.message}</div>
                         </div>
 
                         <div className="form-group">
@@ -61,9 +62,15 @@ const Register = (props) => {
                                 type="text"
                                 className="form-control"
                                 name="email"
-                                value={email}
-                                onChange={e => setEmail(e.target.value)}
+                                ref={register({
+                                    required: 'Please enter you email.',
+                                    pattern: {
+                                        value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                        message: 'Not a valid email address.'
+                                    }
+                                })}
                             />
+                            <div class="invalid-feedback">{errors.email && errors.email.message}</div>
                         </div>
 
                         <div className="form-group">
@@ -72,9 +79,16 @@ const Register = (props) => {
                                 type="password"
                                 className="form-control"
                                 name="password"
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
+                                ref={register({
+                                    required: 'Please enter a password.',
+                                    minLength: {
+                                        value: 5,
+                                        message: 'Min length is 5.',
+                                    },
+                                })}
                             />
+                            <div class="invalid-feedback">{errors.password && errors.password.message}</div>
+
                         </div>
 
                         <div className="form-group">

@@ -7,7 +7,7 @@ import UserInfo from './UserInfo';
 import logo from '../../images/win-a-playstation-5.jpg';
 import '../../Styles.scss';
 
-import QuizService from '../../services/quiz.service';
+import { GetQuestions } from '../../services/quiz.service';
 
 const Quiz = () => {
     const [successful, setSuccessful] = useState(false);
@@ -18,7 +18,7 @@ const Quiz = () => {
     const [score, setScore] = useState();
 
     const getNewQuestions = () => {
-        QuizService.getQuestions()
+        GetQuestions()
             .then(response => {
                 setQuestions(response.data.results);
                 console.log(response);
@@ -32,7 +32,7 @@ const Quiz = () => {
     const updateScore = result => {
         setScore(result);
 
-        if (result >= 80) setPassed(true) 
+        if (result >= 80) setPassed(true)
         else (setFailed(true))
 
         console.log(result);
@@ -41,12 +41,12 @@ const Quiz = () => {
     return (
         <>
             <div className="entry-form">
-                <h5>Enter our quiz below for the chance to enter a PS5 prize draw!</h5>
+                <h4>Enter our quiz below for the chance to enter a PS5 prize draw!</h4>
 
-                { notification && (
-                <div class="alert alert-warning mb-2 text-center">
-                    <p>{notification}</p>
-                </div>
+                {notification && (
+                    <div class="alert alert-warning mb-2 text-center">
+                        <p>{notification}</p>
+                    </div>
                 )}
 
                 <img src={logo} className="logo" alt="logo" />

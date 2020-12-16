@@ -1,7 +1,5 @@
 import axios from "../axios";
 
-const getQuestions = () => {
+export const GetQuestions = () => {
   return axios.get('https://opentdb.com/api.php?amount=5');
 };
-
-export default getQuestions;
