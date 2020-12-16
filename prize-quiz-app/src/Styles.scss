@@ -23,6 +23,11 @@ body {
   border: 5px solid black;
 }
 
+.invalid-feedback {
+  color: red;
+  display: inline;
+}
+
 button {
   transition: all 0.2s ease-in-out;
   font: 18px Helvetica, Arial, sans-serif;

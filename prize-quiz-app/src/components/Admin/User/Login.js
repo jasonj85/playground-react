@@ -1,20 +1,18 @@
 import React, { useState } from "react";
+import { useForm } from 'react-hook-form';
 
-import {LoginUser} from "../../../services/auth.service";
+import { LoginUser } from "../../../services/auth.service";
 
 const Login = (props) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [notification, setNotification] = useState("");
+    const { register, handleSubmit, errors } = useForm();
 
-    const handleLogin = e => {
-        e.preventDefault();
-
+    const onSubmit = data => {
         setNotification("");
         setLoading(true);
 
-        LoginUser(username, password).then(
+        LoginUser(data.username, data.password).then(
             () => {
                 props.history.push("/profile");
                 window.location.reload();
@@ -32,23 +30,26 @@ const Login = (props) => {
             }
         );
     };
-
+    
     return (
         <div className="col-md-12">
             <div class="alert alert-warning mb-2 text-center">
                 <p>Please login with your details</p>
             </div>
             <div className="card card-container">
-                <form onSubmit={handleLogin}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input
                             type="text"
                             className="form-control"
                             name="username"
-                            value={username}
-                            onChange={e => setUsername(e.target.value)}
+                            ref={register({
+                                required: 'Please enter your username.'
+                            })}
                         />
+                        <div class="invalid-feedback">{errors.username && errors.username.message}</div>
+                        
                     </div>
 
                     <div className="form-group">
@@ -57,9 +58,15 @@ const Login = (props) => {
                             type="password"
                             className="form-control"
                             name="password"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
+                            ref={register({
+                                required: 'Please enter a password.',
+                                minLength: {
+                                    value: 5,
+                                    message: 'Min length is 5.',
+                                  },
+                            })}
                         />
+                        <div class="invalid-feedback">{errors.password && errors.password.message}</div>
                     </div>
 
                     <div className="form-group">
