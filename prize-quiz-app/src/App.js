@@ -34,7 +34,7 @@ const App = (props) => {
           <div className="container">
           <Switch>
             {currentUser ? <Route path="/dashboard" exact component={Dashboard} /> : null}
-            {currentUser ? <Route path="/profile" exact component={Profile} /> : null}
+            <Route path="/profile" exact component={Profile} />
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
             <Route path="/" exact component={Quiz} />

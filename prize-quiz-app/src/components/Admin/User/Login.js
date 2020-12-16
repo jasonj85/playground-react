@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
 
-import { LoginUser } from "../../../services/auth.service";
+import { LoginUser, GetCurrentUser } from "../../../services/auth.service";
 
 const Login = (props) => {
     const [loading, setLoading] = useState(false);
@@ -14,8 +14,15 @@ const Login = (props) => {
 
         LoginUser(data.username, data.password).then(
             () => {
-                props.history.push("/profile");
-                window.location.reload();
+
+                if (GetCurrentUser()) {
+                    props.history.push("/profile");
+                    window.location.reload();
+                }
+                else {
+                    setNotification('Please check your username and password.');
+                    setLoading(false);
+                }
             },
             (error) => {
                 const resMessage =
@@ -30,12 +37,14 @@ const Login = (props) => {
             }
         );
     };
-    
+
     return (
         <div className="col-md-12">
-            <div class="alert alert-warning mb-2 text-center">
-                <p>Please login with your details</p>
-            </div>
+            {notification && (
+                    <div className="alert alert-danger mb-2 text-center" role="alert">
+                        {notification}
+                    </div>
+                )}
             <div className="card card-container">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">
@@ -49,7 +58,7 @@ const Login = (props) => {
                             })}
                         />
                         <div class="invalid-feedback">{errors.username && errors.username.message}</div>
-                        
+
                     </div>
 
                     <div className="form-group">
@@ -63,7 +72,7 @@ const Login = (props) => {
                                 minLength: {
                                     value: 5,
                                     message: 'Min length is 5.',
-                                  },
+                                },
                             })}
                         />
                         <div class="invalid-feedback">{errors.password && errors.password.message}</div>
@@ -77,14 +86,6 @@ const Login = (props) => {
                             )}
                         </button>
                     </div>
-
-                    {notification && (
-                        <div className="form-group">
-                            <div className="alert alert-danger" role="alert">
-                                {notification}
-                            </div>
-                        </div>
-                    )}
                 </form>
             </div>
         </div>

@@ -95,19 +95,12 @@ const Register = (props) => {
                             <button className="btn btn-dark btn-block">Register</button>
                         </div>
                     </div>
-
-
-                    {notification && (
-                        <div className="form-group">
-                            <div
-                                className={successful ? "alert alert-success" : "alert alert-danger"}
-                                role="alert"
-                            >
-                                {notification}
-                            </div>
-                        </div>
-                    )}
                 </form>
+                {notification && (
+                    <div className="alert alert-danger mb-2 text-center" role="alert">
+                        {notification}
+                    </div>
+                )}
             </div>
         </div>
     );

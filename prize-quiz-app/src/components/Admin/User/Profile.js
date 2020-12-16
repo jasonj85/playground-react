@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { GetCurrentUser } from "../../../services/auth.service";
 import { GetUserApplications } from "../../../services/application.service";
 
-const Profile = () => {
+import loader from '../../../images/loader.svg';
+
+
+const Profile = (props) => {
     const [currentUser, setCurrentUser] = useState(undefined);
     const [userApplications, setUserApplications] = useState({});
     const [loading, setLoading] = useState(true);
@@ -20,11 +23,19 @@ const Profile = () => {
                     setLoading(false);
                 })
         }
+        else {
+            props.history.push("/login");
+            window.location.reload();
+        }
     }, []);
 
     return (
         <>
-            { loading ? (<p>loading...</p>)
+            { loading ? (
+                <div class="loader" id="loader">
+                    <img src={loader} alt="Loading" />
+                </div>
+            )
                 : (
                     <div className="container" >
                         <header className="jumbotron">
