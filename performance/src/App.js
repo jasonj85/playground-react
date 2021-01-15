@@ -11,10 +11,10 @@ import { AddModal } from "./AddModal";
 function positionCards(cards, width, height) {
   Object.values(cards).forEach(
     card =>
-      (card.position = {
-        left: card.offset.x + width * 0.5,
-        top: card.offset.y + height * 0.5
-      })
+    (card.position = {
+      left: card.offset.x + width * 0.5,
+      top: card.offset.y + height * 0.5
+    })
   );
 }
 
@@ -48,6 +48,7 @@ function App() {
   const boardRef = useRef(null);
   const boardSize = useComponentSize(boardRef);
   const { height, width } = boardSize;
+  const showDialog = useCallback(() => setIsAddOpen(true), []);
 
   useEffect(() => {
     if (height && width) {
@@ -94,7 +95,7 @@ function App() {
     >
       {cardEls}
       <Summary cards={cards} />
-      <AddButton onClick={() => setIsAddOpen(true)} />
+      <AddButton onClick={showDialog} />
       {isAddOpen && (
         <AddModal
           isOpen={isAddOpen}
